@@ -32,12 +32,12 @@ const pedido1: Sofa = cliente1.fazerPedido(
   fabrica
 );
 
-const pedido2: Cadeira = cliente2.fazerPedido(
-  TipoMovel.Cadeira,
-  Estilo.Vitoriano,
-  "branco",
-  Material.Aco,
-  4,
+const pedido2: Sofa = cliente1.fazerPedido(
+  TipoMovel.Sofa,
+  Estilo.Moderno,
+  "cinza",
+  Material.Veludo,
+  2,
   fabrica
 );
 
@@ -59,6 +59,37 @@ const pedido4: Cadeira = cliente2.fazerPedido(
   fabrica
 );
 
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+
+function verificarEscolha() {
+  rl.question("Pedido nao combina quer prosseguir? digite 1 para sim e 2 para nao: ", (escolha: string) => {
+    if (escolha === '1') {
+      console.log("Ok pedido feito");
+    } else if (escolha === '2') {
+      console.log("Ok pedido cancelado");
+    } else {
+      console.log("Entrada inválida. Digite 1 ou 2.");
+    }
+
+    rl.close();
+  });
+}
 console.log(pedido1.combinaCom(pedido2));
-console.log(pedido1.combinaCom(pedido4));
+if (pedido1.combinaCom(pedido2)) {
+  console.log("pedido combina");
+} else {
+  verificarEscolha();
+}
+
+if (pedido1.combinaCom(pedido4)) {
+  console.log("pedido combina");
+} else {
+  verificarEscolha();
+}
 
