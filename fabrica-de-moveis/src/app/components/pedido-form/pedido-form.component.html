@@ -1,0 +1,60 @@
+<form (ngSubmit)="fazerPedido()">
+  <div>
+    <label for="nome">Nome:</label>
+    <input id="nome" [(ngModel)]="nome" name="nome" required>
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" type="email" [(ngModel)]="email" name="email" required>
+  </div>
+  <div>
+    <label for="endereco">Endereço:</label>
+    <input id="endereco" [(ngModel)]="endereco" name="endereco" required>
+  </div>
+  <div>
+    <label for="telefone">Telefone:</label>
+    <input id="telefone" [(ngModel)]="telefone" name="telefone" required>
+  </div>
+  <div>
+    <label for="tipoMovel">Tipo de Móvel:</label>
+    <select id="tipoMovel" [(ngModel)]="tipoMovel" name="tipoMovel">
+      <option *ngFor="let tipo of tiposMoveis" [value]="tipo">{{tipo}}</option>
+    </select>
+  </div>
+  <div>
+    <label for="estilo">Estilo:</label>
+    <select id="estilo" [(ngModel)]="estilo" name="estilo">
+      <option *ngFor="let est of estilos" [value]="est">{{est}}</option>
+    </select>
+  </div>
+  <div>
+    <label for="cor">Cor:</label>
+    <input id="cor" [(ngModel)]="cor" name="cor" required>
+  </div>
+  <div>
+    <label for="material">Material:</label>
+    <select id="material" [(ngModel)]="material" name="material">
+      <option *ngFor="let mat of materiais" [value]="mat">{{mat}}</option>
+    </select>
+  </div>
+  <div>
+    <label for="tamanho">Tamanho:</label>
+    <input id="tamanho" type="number" [(ngModel)]="tamanho" name="tamanho" required>
+  </div>
+  <button type="submit">Fazer Pedido</button>
+</form>
+
+<div *ngIf="resultadoPedido">
+  <h3>Resultado do Pedido:</h3>
+  <p>{{resultadoPedido}}</p>
+
+  <h4>Combinações com móveis existentes:</h4>
+  <ul>
+    <li *ngFor="let combinacao of combinacoes">
+      {{ combinacao.movel.obterDescricao() }} -
+      <span [ngClass]="{'text-success': combinacao.combina, 'text-danger': !combinacao.combina}">
+        {{ combinacao.combina ? 'Combina' : 'Não combina' }}
+      </span>
+    </li>
+  </ul>
+</div>
